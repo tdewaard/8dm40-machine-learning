@@ -19,19 +19,17 @@ def lsq(X, y):
     return beta
 
 
-def eval_lin_model(beta, X_train, y_train):
+def eval_lin_model(beta, X_test, y_test):
     """
-    Evaluates the linear model with coefficient vector beta on training data,
+    Evaluates the linear model with coefficient vector beta on testing data,
     by calculating the mean squared error
     :param beta: coefficient vector
-    :param X: the training data X vector/matrix (attribute values)
-    :param y_train: the training data Y vector (output, class variable)
+    :param X: the testing data X vector/matrix (attribute values)
+    :param y_test: the testing data Y vector (output, class variable)
     :return: MSE: Mean Squared Error of the model
     """
     w = beta.T[:, 1:]
-    y = beta.T[:, 0] + np.dot(X_train, w.T)
-    MSE = np.sum((y - y_train)**2)/y_train.shape[0]
-    return MSE
+    y = beta.T[:, 0] + np.dot(X_test, w.T)
+    MSE = np.sum((y - y_test)**2)/y_test.shape[0]
 
-def test(lol):
-    return None
+    return MSE, y
