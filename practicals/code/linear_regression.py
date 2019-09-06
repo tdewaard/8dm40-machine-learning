@@ -32,3 +32,6 @@ def eval_lin_model(beta, X_train, y_train):
     y = beta.T[:, 0] + np.dot(X_train, w.T)
     MSE = np.sum((y - y_train)**2)/y_train.shape[0]
     return MSE
+
+def test(lol):
+    return None
