@@ -1,6 +1,7 @@
 import numpy as np
 import scipy.stats as ss
 
+
 def cond_prop(X, y):
     mu = np.mean(X, axis=0)
     sigma = np.std(X, axis=0)
@@ -11,5 +12,23 @@ def cond_prop(X, y):
     # Y = 0
     PY_neg = 1 - PY_pos
 
+    # Create vector PY storing all prior probabilities P(Y|X)
+    PY = (y > 0).astype(int) * PY_pos
+    PY[PY == 0] = PY_neg
+
     # calculate matrix P storing all P(X = x) probabilities
-    P = ss.norm.pdf(X, mu, sigma)
+    PX = ss.norm.pdf(X, mu, sigma)
+
+    # compute conditional probabilities: P(X = x | Y = y) = (P(X=x)*P(Y=y|X=x))/P(Y=y)
+    # P(Y = y) = sum_x(P(Y|x)*P(x))
+
+    # prior matrix stores every attribute's P(X)*P(Y|x) calculations
+    prior = PX * PY
+
+    # compute P(y) for all attributes
+    norm = np.sum(prior, axis=1)
+
+    # compute all conditional probabilities P(X=x[idx]|Y)
+    CP = (PX * PY)/norm[:, np.newaxis]
+
+    return CP
