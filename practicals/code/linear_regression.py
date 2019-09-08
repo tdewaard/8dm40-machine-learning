@@ -18,7 +18,6 @@ def lsq(X, y):
 
     return beta
 
-beta = lsq(X_train, y_train)
 
 def eval_lin_model(beta, X_test, y_test):
     """
