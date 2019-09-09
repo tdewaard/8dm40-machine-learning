@@ -1,4 +1,4 @@
-def NNfunction(NN,dataset):
+def NNfunction(NN,dataset,features):
     import numpy as np
     """
     NN=Amount of nearest neighbours.
@@ -20,15 +20,19 @@ def NNfunction(NN,dataset):
     """
     norm_z_train=np.zeros(Z_train.shape)
     norm_z_test=np.zeros(Z_test.shape)
-    for k in range(30):
-        absoluut=np.linalg.norm(Z_train[:,k])
-        normalized=Z_train[:,k]/absoluut
-        norm_z_train[:,k]=normalized
-
-    for k in range(30):
-        absoluut=np.linalg.norm(Z_test[:,k])
-        normalized=Z_test[:,k]/absoluut
-        norm_z_test[:,k]=normalized
+    
+    for i in range(features):
+        min_tr=min(Z_train[:,i])
+        max_tr=max(Z_train[:,i])
+        normalized=(Z_train[:,i]-min_tr)/(max_tr-min_tr)
+        norm_z_train[:,i]=normalized
+        
+    for i in range(features):
+        min_te=min(Z_test[:,i])
+        max_te=max(Z_test[:,i])
+        normalized=(Z_test[:,i]-min_te)/(max_te-min_te)
+        norm_z_test[:,i]=normalized
+        
     """
     The classification results are stored in the variable Results. In the for loop, the distances between the sample from the 
     test data, and all of the training data is calculated and stored in the the list distance. After sorting this list, the k nearest 
