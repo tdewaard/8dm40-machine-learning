@@ -3,6 +3,13 @@ import scipy.stats as ss
 
 
 def cond_prop(X, y):
+    """
+    Calculates class conditional probability for attribute values stored in X,
+    class values stored in y.
+    :param X: N x p input matrix
+    :param y: N x 1 output vector (class, binary)
+    :return: CP: N x p matrix storing the calculated class conditional probabilities
+    """
     mu = np.mean(X, axis=0)
     sigma = np.std(X, axis=0)
 
@@ -28,7 +35,7 @@ def cond_prop(X, y):
     # compute P(y) for all attributes
     norm = np.sum(prior, axis=1)
 
-    # compute all conditional probabilities P(X=x[idx]|Y)
+    # compute all conditional probabilities P(X=x|Y)
     CP = (PX * PY)/norm[:, np.newaxis]
 
     return CP
