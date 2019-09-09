@@ -1,6 +1,8 @@
 def NNfunction(NN,dataset):
     import numpy as np
     """
+    NN=Amount of nearest neighbours.
+    data=combination of training and test datasets
     Appoint the dataset to a variable value and devide the dataset into a training and testing subdataset.
     """
     Z=dataset.data
