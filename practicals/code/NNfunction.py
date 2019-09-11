@@ -1,8 +1,6 @@
 def NNfunction(NN,dataset,features):
     import numpy as np
     """
-    NN=Amount of nearest neighbours.
-    data=combination of training and test datasets
     Appoint the dataset to a variable value and devide the dataset into a training and testing subdataset.
     """
     Z=dataset.data
@@ -33,6 +31,9 @@ def NNfunction(NN,dataset,features):
         normalized=(Z_test[:,i]-min_te)/(max_te-min_te)
         norm_z_test[:,i]=normalized
         
+    
+    
+
     """
     The classification results are stored in the variable Results. In the for loop, the distances between the sample from the 
     test data, and all of the training data is calculated and stored in the the list distance. After sorting this list, the k nearest 
@@ -45,7 +46,7 @@ def NNfunction(NN,dataset,features):
         originaldist=[]
         targets=[]
         for j in range(len(target_train)):
-            verschil=abs(np.linalg.norm(norm_z_test[i,:])-np.linalg.norm(norm_z_train[j,:]))
+            verschil=np.linalg.norm(norm_z_test[i,:]-norm_z_train[j,:])
             distance.append(verschil)
             originaldist.append(verschil)
         distance.sort()
