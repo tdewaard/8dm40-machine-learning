@@ -4,11 +4,16 @@ import scipy.stats as ss
 
 def cond_prop(X, y):
     """
-    Calculates class conditional probability for attribute values stored in X,
-    class values stored in y.
-    :param X: N x p input matrix
-    :param y: N x 1 output vector (class, binary)
-    :return: CP: N x p matrix storing the calculated class conditional probabilities
+    Calculate class conditional probabilities assuming a gaussian distribution.
+    :param X: Feature matrix (N x p) with N number of instances and p number of parameters
+    :param y: Class vector N x 1 (binary) vector
+    :return: CP: cond. prop. not separated by class
+             CP_pos: normalised cond. prop. pos class
+             CP_neg: normalised cond. prop. neg class
+             PXpos: gaussian of pos class
+             PXneg: gaussian of neg class
+             priorPos: prior probabilty pos class
+             priorNeg: prior probability neg class
     """
     i = y[:, 0] > 0
     j = y[:, 0] == 0
@@ -54,8 +59,8 @@ def cond_prop(X, y):
     normNeg = np.sum(priorNeg, axis=1)
 
     # compute all conditional probabilities P(X=x|Y)
-    CP = (PX * PY)/norm[:, np.newaxis]
-    CP_pos = (PXpos * PY[i, :])/normPos[:, np.newaxis]
-    CP_neg = (PXneg * PY[j, :])/normNeg[:, np.newaxis]
+    CP = prior/norm[:, np.newaxis]
+    CP_pos = priorPos/normPos[:, np.newaxis]
+    CP_neg = priorNeg/normNeg[:, np.newaxis]
 
-    return CP, CP_pos, CP_neg, PXpos, PXneg
+    return CP, CP_pos, CP_neg, PXpos, PXneg, priorPos, priorNeg
