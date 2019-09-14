@@ -7,7 +7,7 @@ def NNfunctionRegression(NN,dataset,features):
     Z_train=Z[:221]
     Z_test=Z[221:]
     """
-    Appoint the targets( whether the given datasamples are malignant or healthy) and store this information in the variables : 
+    Appoint the targets and store this information in the variables : 
     target_train and target_test.
     """
     target_train = dataset.target[:221, np.newaxis]
@@ -36,7 +36,8 @@ def NNfunctionRegression(NN,dataset,features):
     """
     The classification results are stored in the variable Results. In the for loop, the distances between the sample from the 
     test data, and all of the training data is calculated and stored in the the list distance. After sorting this list, the k nearest 
-    neighbours ( with minimal distance to the sample) were evaluated and their targets were averaged and the sample was given the value 0 or 1.
+    neighbours ( with minimal distance to the sample) were evaluated and their targets were averaged and the sample was given the average
+    value of the nearest neighbours' target values. These averages are stored in the variable Results which is returned by this function.
     """
     Results=np.zeros((len(target_train),1))
     
