@@ -20,7 +20,6 @@ def gryds_function(images):
 
         interpolator = gryds.MultiChannelInterpolator(images[i], order=0, cval=[.1, .2, .3],mode='nearest')
         transformed_image = interpolator.transform(bspline,affine)
-        print(transformed_image.shape)
         new_image.append(transformed_image)
         
     return np.array(new_image)
