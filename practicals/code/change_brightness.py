@@ -8,8 +8,8 @@ def change_brightness(images):
     alterdImages=[]
     
     for i in range(len(images)):
-        #generate a random value between 0.1 and 2.0 
-        random_value=random.randrange(10,200)/100
+        #generate a random value between 0.4and 7.0 
+        random_value=random.randrange(40,700)/100
         
         #multiply the entire image with the randomly generated value in order to scale the intensity
         changed_brightness=images[i]*random_value
