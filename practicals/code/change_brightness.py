@@ -13,6 +13,6 @@ def change_brightness(images):
         
         #multiply the entire image with the randomly generated value in order to scale the intensity
         changed_brightness=images[i]*random_value
-        alterdImages.append(changed_brightness)
+        alterdImages.append(np.clip(changed_brightness,0,1))
     
     return np.array(alterdImages)
